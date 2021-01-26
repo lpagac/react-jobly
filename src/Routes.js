@@ -10,6 +10,9 @@ function Routes({currentUser, applyToJob, updateCurrentInfo}) {
           <Route exact path="/">
             <HomePage />
           </Route>
+          <Route exact path="/companies">
+            <CompanyList />
+          </Route>
         </Switch>
       </BrowserRouter>
   );
