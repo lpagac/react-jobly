@@ -14,13 +14,15 @@ function HomePage({currentUser}) {
   function renderLoggedOutView() {
     return (
       <div>
-        <Link exact to="/login">Login</Link>
-        <Link exact to="/signup">Signup!</Link>
+        <Link exact to="/login"> Login </Link>
+        <Link exact to="/signup"> Signup! </Link>
       </div>);
   }
   return(
     <div>
-      <h1>Jobly! <small>All the jobs in one convenient place!</small></h1>
+      <h1>Jobly!
+        <small><br/>All the jobs in one convenient place!</small>
+        </h1>
       { (currentUser) ? renderLoggedInView() : renderLoggedOutView()}
     </div>
   );

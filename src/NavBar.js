@@ -11,9 +11,9 @@ function NavBar({currentUser, logOut}) {
   function renderLoggedInView(){
     return (
       <div className="NavBar-right">
-        <NavLink exact path="/companies"> Companies </NavLink>
-        <NavLink exact path="/jobs"> Jobs </NavLink>
-        <NavLink exact path="/profile"> Profile </NavLink>
+        <NavLink exact to="/companies"> Companies </NavLink>
+        <NavLink exact to="/jobs"> Jobs </NavLink>
+        <NavLink exact to="/profile"> Profile </NavLink>
         <button onClick={logOut}> Logout </button>
       </div>);
   }
@@ -29,7 +29,7 @@ function NavBar({currentUser, logOut}) {
 
   return(
     <nav>
-      <NavLink exact path="/">Jobly</NavLink>
+      <NavLink exact to="/">Jobly</NavLink>
 
       { (currentUser) ? renderLoggedInView() : renderLoggedOutView()}
     </nav>
