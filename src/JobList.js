@@ -1,5 +1,5 @@
 import JobCard from "./JobCard";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import JoblyApi from "./APIHelper";
 import SearchForm from "./SearchForm";
 import "./JobList.css";
@@ -16,13 +16,14 @@ import "./JobList.css";
  *
  */
 
-function JobList({ jobsForCompany=null, applyToJob }) {
+function JobList({ jobsForCompany = null, applyToJob }) {
   console.log("JobList rendered");
   const [jobs, setJobs] = useState(jobsForCompany);
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
 
   /* Renders JobCard components based on jobs in state */
   function renderJobs() {
+    // pass each prop individually
     return jobs.map(j => <JobCard key={j.id} job={j} apply={applyToJob} />);
   }
 
@@ -37,8 +38,8 @@ function JobList({ jobsForCompany=null, applyToJob }) {
    */
   useEffect(function makeJobsAPIRequest() {
     async function makeAPIRequest() {
-      const res = await JoblyApi.getJobs(searchTerm);
-      setJobs(res);
+      const jobsResult = await JoblyApi.getJobs(searchTerm);
+      setJobs(jobsResult);
     }
     makeAPIRequest();
   }, [searchTerm]);
@@ -50,9 +51,9 @@ function JobList({ jobsForCompany=null, applyToJob }) {
     <div className="JobList-page">
       <h2>Jobs:</h2>
       <SearchForm handleSearch={updateJobs} />
-    <div className="JobList">
-      {renderJobs()}
-    </div>
+      <div className="JobList">
+        {renderJobs()}
+      </div>
     </div>
   )
 }

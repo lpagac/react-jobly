@@ -8,7 +8,9 @@ import { useState } from 'react';
  */
 function App() {
   console.log("App rendered");
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
+  // Going to need token state default ''
+  // change currUser whenever the token changes via effect with token as dependency
 
   function login(user){
     setCurrentUser(user);

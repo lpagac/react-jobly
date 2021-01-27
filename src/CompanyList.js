@@ -16,10 +16,11 @@ import "./CompanyList.css";
 function CompanyList() {
   console.log("CompanyList rendered");
   const [companies, setCompanies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
 
   /* Renders CompanyCard components based on Companies in state */
   function renderCompanies() {
+    // pass down each key individually 
     return companies.map(company => <CompanyCard key={company.handle} company={company} />);
   }
 
@@ -34,12 +35,15 @@ function CompanyList() {
    */
   useEffect(function makeCompaniesAPIRequest() {
     async function makeAPIRequest() {
-      const res = await JoblyApi.getCompanies(searchTerm);
-      setCompanies(res);
+      // wrap with try/catch
+      const companiesResult = await JoblyApi.getCompanies(searchTerm);
+      setCompanies(companiesResult);
     }
     makeAPIRequest();
   }, [searchTerm]);
 
+
+  // add loading return 
 
   return (
     <div className="CompanyList-page">

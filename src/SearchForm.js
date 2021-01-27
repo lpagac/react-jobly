@@ -16,9 +16,7 @@ function SearchForm({handleSearch}){
 
   /* Helper function to update searchTerm */
   function handleChange(evt){
-    const {value} = evt.target;
-    console.log("{value} in handle change", value);
-    setSearchTerm(value);
+    setSearchTerm(evt.target.value);
   }
   return (
     <form onSubmit={handleSubmit}>

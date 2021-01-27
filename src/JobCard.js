@@ -9,11 +9,12 @@ import "./JobCard.css";
  */
 function JobCard({job, apply}) {
   console.log("JobCard rendered");
+  // define apply func here
   return(
     <div className="JobCard">
       <h3>{job.title}</h3>
       <p>Salary: {job.salary}</p>
-      <p>Equity: {job.Equity}</p>
+      <p>Equity: {job.equity}</p>
       <button onClick={() => apply(job.id)}>Apply</button>
     </div>
   );
