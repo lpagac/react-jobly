@@ -19,7 +19,7 @@ import "./JobList.css";
 function JobList({ jobsForCompany = null, applyToJob }) {
   console.log("JobList rendered");
   const [jobs, setJobs] = useState(jobsForCompany);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(null);
 
   /* Renders JobCard components based on jobs in state */
   function renderJobs() {

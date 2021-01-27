@@ -16,7 +16,7 @@ import "./CompanyList.css";
 function CompanyList() {
   console.log("CompanyList rendered");
   const [companies, setCompanies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(null);
 
   /* Renders CompanyCard components based on Companies in state */
   function renderCompanies() {
