@@ -9,16 +9,20 @@ import JoblyApi from "./APIHelper";
  *
  * state:
  * - companies: array like [{company info}, ...]
+ * - searchTerm: term used in API request to get filtered list of companies
  */
 
 function CompanyList() {
   const [companies, setCompanies] = useState([]);
   const [searchTerm, setSearchTerm] = useState();
 
+  /* Renders CompanyCard components based on Companies in state */
   function renderCompanies() {
     return companies.map(company => <CompanyCard key={company.handle} company={company} />);
   }
 
+  /* Updates list of companies to be displayed
+   * on page after search */
   function updateCompanies(searchTerm) {
     setSearchTerm(searchTerm);
   }

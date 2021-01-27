@@ -7,9 +7,11 @@ import SearchForm from "./SearchForm";
  *
  * props:
  * - applyToJob: function to update currUser in App state
- * - jobs: array of objects with job info
+ * - jobsForCompany: array of objects with job info
  *
- * state: None
+ * state:
+ * - jobs: list of jobs to display
+ * - searchTerm: term used in API request to get filtered list of jobs
  *
  */
 
@@ -17,15 +19,19 @@ function JobList({ jobsForCompany=null, applyToJob }) {
   const [jobs, setJobs] = useState(jobsForCompany);
   const [searchTerm, setSearchTerm] = useState();
 
+  /* Renders JobCard components based on jobs in state */
   function renderJobs() {
     return jobs.map(j => <JobCard key={j.id} job={j} apply={applyToJob} />);
   }
+
+  /* Updates list of jobs to be displayed
+   * on page after search */
   function updateJobs(searchTerm) {
     setSearchTerm(searchTerm);
   }
 
-  /* Uses effect to make a request to companies API
-   * Fetches a list of companies to display
+  /* Uses effect to make a request to jobs API
+   * Fetches a list of jobs to display
    */
   useEffect(function makeJobsAPIRequest() {
     async function makeAPIRequest() {
