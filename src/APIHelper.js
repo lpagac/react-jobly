@@ -20,8 +20,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -44,16 +44,14 @@ class JoblyApi {
   /** Get all companies with optional filer on company name */
 
   static async getCompanies(name) {
-    const data = name ? {name: name} : {};
-    const res = await this.request('/companies', data);
+    const res = await this.request('/companies', { name });
     return res.companies;
   };
 
   /** Get all jobs with optional filer on job title */
 
   static async getJobs(title) {
-    const data = title ? {title: title} : {};
-    const res = await this.request('/jobs', data);
+    const res = await this.request('/jobs', { title });
     return res.jobs;
   };
 
@@ -64,31 +62,53 @@ class JoblyApi {
     return res.user;
   }
 
-  /** Login a user */
+  /** Login a user, returns token 
+   * 
+   * takes {username, password}
+  */
 
-  static async getLoginToken(data) {
-    const res = await this.request('/auth/token', data, "POST");
+  static async login({ username, password }) {
+    const res = await this.request('/auth/token', { username, password }, "POST");
     return res.token;
   };
 
-  /** Signup a new user */
+  /** Signup a new user, returns token 
+   * 
+   * takes {username, password, firstName, lastName, email}
+   * 
+  */
 
-  static async getNewUserToken(data) {
-    const res = await this.request('/auth/register', data, 'POST');
+
+  static async signup({ username, password, firstName, lastName, email }) {
+    const res = await this.request(
+      '/auth/register',
+      { username, password, firstName, lastName, email },
+      'POST'
+    );
     return res.token;
   };
 
-  /** Update user profile info */
+  /** Update user profile info
+   * 
+   * takes:
+   * - username
+   * - updateInfo: { firstName, lastName, email, password }
+   */
 
-  static async updateUser(username, data) {
-    const res = await this.request(`/users/${username}`, data, "PATCH");
+  // SPREAD DATA be explicit
+  static async updateUser(username, { firstName, lastName, email, password }) {
+    const res = await this.request(
+      `/users/${username}`,
+      { firstName, lastName, email, password },
+      "PATCH"
+    );
     return res.user;
   }
 }
 
 // for now, put token ("testuser" / "password" on class)
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
 export default JoblyApi;

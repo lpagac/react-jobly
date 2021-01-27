@@ -5,7 +5,7 @@
  * - user: currUser
  * 
  * state: 
- * - formData: object like {username, firstName, lastName, email, password}
+ * - formData: object like {firstName, lastName, email, password}
  * 
  */
 

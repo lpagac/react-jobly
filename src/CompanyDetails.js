@@ -10,7 +10,7 @@
 function CompanyDetails({applyToJob}) {
   return (
     <div className="CompanyDetails">
-      
+      CompanyDetails
     </div>
   )
 }
