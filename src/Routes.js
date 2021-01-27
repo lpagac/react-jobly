@@ -8,6 +8,8 @@ import ProfileForm from './ProfileForm';
 import CompanyDetails from './CompanyDetails';
 import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 
+/** Renders all Routes for site */
+
 function Routes({currentUser, applyToJob, updateCurrentInfo, createNewUser, loginUser}) {
   return(
       <BrowserRouter>

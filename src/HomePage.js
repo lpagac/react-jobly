@@ -14,8 +14,8 @@ function HomePage({currentUser}) {
   function renderLoggedOutView() {
     return (
       <div>
-        <Link exact to="/login"> Login </Link>
-        <Link exact to="/signup"> Signup! </Link>
+        <Link to="/login"> Login </Link>
+        <Link to="/signup"> Signup! </Link>
       </div>);
   }
   return(

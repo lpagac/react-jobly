@@ -28,7 +28,7 @@ function NavBar({currentUser, logOut}) {
   }
 
   return(
-    <nav>
+    <nav className="NavBar">
       <NavLink exact to="/">Jobly</NavLink>
 
       { (currentUser) ? renderLoggedInView() : renderLoggedOutView()}

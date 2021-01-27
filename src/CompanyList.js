@@ -12,32 +12,39 @@ import JoblyApi from "./APIHelper";
  */
 
 function CompanyList() {
-  const [companies, setCompanies] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(null);
+  // const [companies, setCompanies] = useState(null);
+  // const [searchTerm, setSearchTerm] = useState(null);
 
-  function renderCompanies() {
-    return companies.map(company => <CompanyCard company={company} />);
-  }
+  // function renderCompanies() {
+  //   return companies.map(company => <CompanyCard company={company} />);
+  // }
 
-  function updateCompanies(term) {
-    setSearchTerm(term);
-  }
+  // function updateCompanies(term) {
+  //   setSearchTerm(term);
+  // }
 
-  /* Uses effect to make a request to companies API
-   * Fetches a list of companies to display
-   */
-  useEffect(function makeCompaniesAPIRequest() {
-    async function makeAPIRequest() {
-      return await JoblyApi.getCompanies(searchTerm);
-    }
-    makeAPIRequest();
-  }, [searchTerm]);
+  // /* Uses effect to make a request to companies API
+  //  * Fetches a list of companies to display
+  //  */
+  // useEffect(function makeCompaniesAPIRequest() {
+  //   async function makeAPIRequest() {
+  //     return await JoblyApi.getCompanies(searchTerm);
+  //   }
+  //   makeAPIRequest();
+  // }, [searchTerm]);
 
 
+  // return (
+  //   <div>
+  //     <h2>Companies:</h2>
+  //     <SearchForm handleSubmit={updateCompanies} />
+  //     {renderCompanies()}
+  //   </div>);
   return (
     <div>
-      <h2>Companies:</h2>
-      <SearchForm handleSubmit={updateCompanies} />
-      {renderCompanies()}
-    </div>);
+      Companies
+    </div>
+  )
 }
+
+export default CompanyList;
