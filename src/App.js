@@ -3,6 +3,9 @@ import NavBar from './NavBar';
 import Routes from './Routes';
 import './App.css';
 import { useState } from 'react';
+import UserContext from "./userContext";
+import JoblyApi from './APIHelper';
+import jwt from "json-web-token";
 
 /* App component
  */
@@ -12,14 +15,23 @@ function App() {
   const [token, setToken] = useState('');
   // change currUser whenever the token changes via effect with token as dependency
 
+  useEffect(function makeApiRequestForUser() {
+    async function fetchUser() {
+      const username = jwt.decode(token).username;
+      const userInfo = await JoblyApi.getCurrentUser(username)
+      setCurrentUser(userInfo);
+    }
+  }, [token]);
   /* Login function
    * Passed down to Routes
    */
-  function login(user){
-    setCurrentUser(user);
-    console.log("token:",token);
-  }
-  console.log("login function",login);
+  function loginUser(formData){
+    async function makeApiRequestToLogin() {
+      const userToken = await JoblyApi.login(formData);
+      setToken(userToken);
+    };
+    makeApiRequestToLogin();
+  };
 
   /* applyToJob function
    * Passed down to JobCard
@@ -31,36 +43,45 @@ function App() {
   /* updateProfileInfo function
    * Passed down to Routes
    */
-  function updateProfileInfo(){
-    console.log("updateProfileInfo");
+  function updateProfileInfo(formData){
+    async function updateUser() {
+      const username = jwt.decode(token).username;
+      const newUser = JoblyApi.updateUser(username, formData);
+      setCurrentUser(currUser => {
+        return {
+          ...currUser,
+          firstName: newUser.firstName,
+          lastName: newUser.lastName,
+          email: newUser.email,
+          isAdmin: newUser.isAdmin,
+        }
+    });
+    updateUser();
   }
 
   /* createNewUser function
    * used by /signup
    * Passed down to SignUpForm
    */
-  function createNewUser(){
-    console.log("createNewUser");
-  }
-
-  /* loginUser function
-   * used by /login
-   * Passed down to LoginForm
-   */
-  function loginUser(){
-    console.log("loginUser");
+  function createNewUser(formData){
+    async function makeApiRequestToLogin() {
+      const userToken = await JoblyApi.signup(formData);
+      setToken(userToken);
+    };
+    makeApiRequestToLogin(); 
   }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
-        <Routes
-          currentUser={currentUser}
-          updateProfileInfo={updateProfileInfo}
-          createNewUser={createNewUser}
-          loginUser={loginUser}
-          applyToJob={applyToJob} />
+        <UserContext.Provider value={currentUser}>
+          <NavBar />
+          <Routes
+            updateProfileInfo={updateProfileInfo}
+            createNewUser={createNewUser}
+            loginUser={loginUser}
+            applyToJob={applyToJob} />
+        </UserContext.Provider>
       </BrowserRouter>
     </div>
   );

@@ -95,7 +95,6 @@ class JoblyApi {
    * - updateInfo: { firstName, lastName, email, password }
    */
 
-  // SPREAD DATA be explicit
   static async updateUser(username, { firstName, lastName, email, password }) {
     const res = await this.request(
       `users/${username}`,

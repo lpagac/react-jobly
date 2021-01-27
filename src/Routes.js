@@ -5,12 +5,11 @@ import SignUpForm from './SignUpForm';
 import CompanyList from './CompanyList';
 import ProfileForm from './ProfileForm';
 import CompanyDetails from './CompanyDetails';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 /** Renders all Routes for site
  *
  * props:
- * - currentUser
  * - applyToJob: function
  * - updateCurrentInfo: function
  * - createNewUser: function
@@ -19,43 +18,42 @@ import {Route, Switch, Redirect} from 'react-router-dom';
  * state: None
  */
 
-// CODE REVIEW move NavBar & BrowserRouter to App
-function Routes({currentUser, applyToJob, updateCurrentInfo, createNewUser, loginUser}) {
+function Routes({ applyToJob, updateCurrentInfo, createNewUser, loginUser }) {
   console.log("Routes rendered");
-  return(
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
+  return (
+    <Switch>
+      <Route exact path="/">
+        <HomePage />
+      </Route>
 
-        <Route exact path="/companies">
-          <CompanyList />
-        </Route>
+      <Route exact path="/companies">
+        <CompanyList />
+      </Route>
 
-        <Route exact path="/companies/:handle">
-          <CompanyDetails applyToJob={applyToJob} />
-        </Route>
+      <Route exact path="/companies/:handle">
+        <CompanyDetails applyToJob={applyToJob} />
+      </Route>
 
-        <Route exact path="/jobs">
-          <JobList applyToJob={applyToJob} />
-        </Route>
+      <Route exact path="/jobs">
+        <JobList applyToJob={applyToJob} />
+      </Route>
 
-        <Route exact path="/signup">
-          <SignUpForm handleSubmit={createNewUser} />
-        </Route>
+      <Route exact path="/signup">
+        <SignUpForm handleSubmit={createNewUser} />
+      </Route>
 
-        <Route exact path="/login">
-          <LoginForm handleSubmit={loginUser} />
-        </Route>
+      <Route exact path="/login">
+        <LoginForm handleSubmit={loginUser} />
+      </Route>
 
-        <Route exact path="/profile">
-          <ProfileForm handleSubmit={updateCurrentInfo} user={currentUser} />
-        </Route>
+      <Route exact path="/profile">
+        <ProfileForm handleSubmit={updateCurrentInfo} />
+      </Route>
 
-        <Route>
-          <Redirect to="/"/>
-        </Route>
-      </Switch>
+      <Route>
+        <Redirect to="/" />
+      </Route>
+    </Switch>
   );
 }
 

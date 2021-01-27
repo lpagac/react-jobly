@@ -1,5 +1,7 @@
 import { NavLink} from 'react-router-dom';
 import "./NavBar.css";
+import UserContext from "./userContext";
+import {useContext} from "react";
 
 /** NavBar Component
  * Props: logout (function, logs user out)
@@ -8,6 +10,7 @@ import "./NavBar.css";
  **/
 function NavBar({currentUser, logOut}) {
   console.log("NavBar rendered");
+  const currentUser = useContext(UserContext);
 
   // /* Renders view for current user */
   // function renderLoggedInView(){
