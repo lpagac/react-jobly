@@ -1,4 +1,3 @@
-import NavBar from './NavBar';
 import JobList from './JobList';
 import HomePage from './HomePage';
 import LoginForm from './LoginForm';
@@ -6,17 +5,17 @@ import SignUpForm from './SignUpForm';
 import CompanyList from './CompanyList';
 import ProfileForm from './ProfileForm';
 import CompanyDetails from './CompanyDetails';
-import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 /** Renders all Routes for site
- * 
+ *
  * props:
  * - currentUser
- * - applyToJob: function 
+ * - applyToJob: function
  * - updateCurrentInfo: function
  * - createNewUser: function
  * - loginUser: function
- * 
+ *
  * state: None
  */
 

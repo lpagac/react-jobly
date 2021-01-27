@@ -36,10 +36,12 @@ function CompanyList() {
 
 
   return (
-    <div>
+    <div className="CompanyList-Page">
       <h2>Companies:</h2>
       <SearchForm handleSearch={updateCompanies} />
-      {renderCompanies()}
+      <div className="CompanyList">
+        {renderCompanies()}
+      </div>
     </div>);
 
 }

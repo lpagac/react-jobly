@@ -8,7 +8,7 @@ import JobList from "./JobList";
  * props:
  * - applyToJob: function to update currUser in App state
  *
- * state: 
+ * state:
  * - company: result of API call to get company info based on handle params
  *
  */
@@ -19,17 +19,19 @@ function CompanyDetails({ applyToJob }) {
 
   useEffect(function makeApiCallForComp() {
     async function fetchCompanyInfo() {
-      const res = JoblyApi.getCompany(handle)
+      const res = await JoblyApi.getCompany(handle)
       setCompany(res);
     }
     fetchCompanyInfo();
-  }, []);
+  }, [handle]);
 
+  if (!company) return (<div>Loading...</div>);
   return (
+
     <div className="CompanyDetails">
       <h2 className="CompnayDetails-name">{company.name}</h2>
       <p className="CompanyDetails-description">{company.description}</p>
-      <JobList apply={applyToJob} jobs={company.jobs}/>
+      <JobList applyToJob={applyToJob} jobs={company.jobs}/>
     </div>
   )
 }

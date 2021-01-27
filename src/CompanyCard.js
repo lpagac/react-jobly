@@ -8,11 +8,11 @@ import './CompanyCard.css';
 
 function CompanyCard({company}) {
   return (
-    <div className="CompanyCard">
+    <Link to={`/companies/${company.handle}`} className="CompanyCard">
       <img alt={company.name} src={company.logoUrl}></img>
       <b> {company.name} </b> Total employees: {company.numEmployees}
       <p> {company.description} </p>
-    </div>
+    </Link>
   )
 }
 

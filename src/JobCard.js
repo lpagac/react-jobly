@@ -14,7 +14,7 @@ function JobCard({job, apply}) {
       <h3>{job.title}</h3>
       <p>Salary: {job.salary}</p>
       <p>Equity: {job.Equity}</p>
-      <button onClick={apply}>Apply</button>
+      <button onClick={() => apply(job.id)}>Apply</button>
     </div>
   );
 }
