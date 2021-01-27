@@ -32,7 +32,7 @@ function Routes({currentUser, applyToJob, updateCurrentInfo, createNewUser, logi
           <CompanyList />
         </Route>
 
-        <Route exact path="/companies/:name">
+        <Route exact path="/companies/:handle">
           <CompanyDetails applyToJob={applyToJob} />
         </Route>
 

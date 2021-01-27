@@ -19,7 +19,7 @@ function CompanyList() {
     return companies.map(company => <CompanyCard key={company.handle} company={company} />);
   }
 
-  function updateCompanies({searchTerm}) {
+  function updateCompanies(searchTerm) {
     setSearchTerm(searchTerm);
   }
 
@@ -38,7 +38,7 @@ function CompanyList() {
   return (
     <div>
       <h2>Companies:</h2>
-      <SearchForm handleSubmit={updateCompanies} />
+      <SearchForm handleSearch={updateCompanies} />
       {renderCompanies()}
     </div>);
 

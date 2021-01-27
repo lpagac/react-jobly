@@ -2,17 +2,24 @@ import { useState } from "react";
 
 /* SearchForm Component
  */
-function SearchForm({handleSubmit}){
-  const [searchTerm, setSearchTerm] = useState({searchTerm:""});
+function SearchForm({handleSearch}){
+  const [searchTerm, setSearchTerm] = useState('');
+
+  /** Handle form submit to prevent default  */
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    handleSearch(searchTerm);
+  }
 
   /* Helper function to update searchTerm */
   function handleChange(evt){
     const {value} = evt.target;
-    setSearchTerm(fData => {return {"searchTerm":value} });
+    console.log("{value} in handle change", value);
+    setSearchTerm(value);
   }
   return (
     <form onSubmit={handleSubmit}>
-      <input vlaue={searchTerm.searchTerm} name="query" onChange={handleChange}></input>
+      <input value={searchTerm} name="name" onChange={handleChange}></input>
       <button type="submit"> Search </button>
     </form>
   );

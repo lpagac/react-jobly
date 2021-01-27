@@ -1,16 +1,19 @@
+import JobCard from "./JobCard";
+
 /** Render list of all jobs and SearchForm
  * 
  * props:
  * - applyToJob: function to update currUser in App state
+ * - jobs: array of objects with job info
  * 
  * state: None
  * 
  */
 
-function JobList({applyToJob}) {
+function JobList({ jobs, apply }) {
   return (
     <div className="JobList">
-      JobList
+      {jobs.map(j => <JobCard job={j} apply={apply} />)}
     </div>
   )
 }
