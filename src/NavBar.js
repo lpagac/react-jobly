@@ -1,4 +1,5 @@
 import { NavLink} from 'react-router-dom';
+import "./NavBar.css";
 
 /** NavBar Component
  * Props: logout (function, logs user out)
@@ -7,25 +8,25 @@ import { NavLink} from 'react-router-dom';
  **/
 function NavBar({currentUser, logOut}) {
 
-  /* Renders view for current user */
-  function renderLoggedInView(){
-    return (
-      <div className="NavBar-right">
-        <NavLink exact to="/companies"> Companies </NavLink>
-        <NavLink exact to="/jobs"> Jobs </NavLink>
-        <NavLink exact to="/profile"> Profile </NavLink>
-        <button onClick={logOut}> Logout </button>
-      </div>);
-  }
+  // /* Renders view for current user */
+  // function renderLoggedInView(){
+  //   return (
+  //     <div className="NavBar-right">
+  //       <NavLink exact to="/companies"> Companies </NavLink>
+  //       <NavLink exact to="/jobs"> Jobs </NavLink>
+  //       <NavLink exact to="/profile"> Profile </NavLink>
+  //       <button onClick={logOut}> Logout </button>
+  //     </div>);
+  // }
 
-  /* Renders view when there is no current user */
-  function renderLoggedOutView() {
-    return (
-      <div className="NavBar-right">
-        <NavLink exact to="/login"> Login </NavLink>
-        <NavLink exact to="/signup"> Signup </NavLink>
-      </div>);
-  }
+  // /* Renders view when there is no current user */
+  // function renderLoggedOutView() {
+  //   return (
+  //     <div className="NavBar-right">
+  //       <NavLink exact to="/login"> Login </NavLink>
+  //       <NavLink exact to="/signup"> Signup </NavLink>
+  //     </div>);
+  // }
 
   function renderStandardView() {
     return (

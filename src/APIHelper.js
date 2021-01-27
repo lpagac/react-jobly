@@ -44,44 +44,44 @@ class JoblyApi {
   /** Get all companies with optional filer on company name */
 
   static async getCompanies(name) {
-    const res = await this.request('/companies', { name });
+    const res = await this.request('companies', { name });
     return res.companies;
   };
 
   /** Get all jobs with optional filer on job title */
 
   static async getJobs(title) {
-    const res = await this.request('/jobs', { title });
+    const res = await this.request('jobs', { title });
     return res.jobs;
   };
 
   /** Get current user info */
 
   static async getCurrentUser(username) {
-    const res = await this.request(`/users/${username}`);
+    const res = await this.request(`users/${username}`);
     return res.user;
   }
 
-  /** Login a user, returns token 
-   * 
+  /** Login a user, returns token
+   *
    * takes {username, password}
   */
 
   static async login({ username, password }) {
-    const res = await this.request('/auth/token', { username, password }, "POST");
+    const res = await this.request('auth/token', { username, password }, "POST");
     return res.token;
   };
 
-  /** Signup a new user, returns token 
-   * 
+  /** Signup a new user, returns token
+   *
    * takes {username, password, firstName, lastName, email}
-   * 
+   *
   */
 
 
   static async signup({ username, password, firstName, lastName, email }) {
     const res = await this.request(
-      '/auth/register',
+      'auth/register',
       { username, password, firstName, lastName, email },
       'POST'
     );
@@ -89,7 +89,7 @@ class JoblyApi {
   };
 
   /** Update user profile info
-   * 
+   *
    * takes:
    * - username
    * - updateInfo: { firstName, lastName, email, password }
@@ -98,7 +98,7 @@ class JoblyApi {
   // SPREAD DATA be explicit
   static async updateUser(username, { firstName, lastName, email, password }) {
     const res = await this.request(
-      `/users/${username}`,
+      `users/${username}`,
       { firstName, lastName, email, password },
       "PATCH"
     );
