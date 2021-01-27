@@ -20,7 +20,7 @@ function CompanyList() {
 
   /* Renders CompanyCard components based on Companies in state */
   function renderCompanies() {
-    // pass down each key individually 
+    // pass down each key individually
     return companies.map(company => <CompanyCard key={company.handle} company={company} />);
   }
 
@@ -39,11 +39,16 @@ function CompanyList() {
       const companiesResult = await JoblyApi.getCompanies(searchTerm);
       setCompanies(companiesResult);
     }
-    makeAPIRequest();
+    try {
+      makeAPIRequest();
+    }
+    catch (e) {
+      console.error("Error: update jobs failed:\n", e);
+    }
   }, [searchTerm]);
 
 
-  // add loading return 
+  // add loading return
 
   return (
     <div className="CompanyList-page">

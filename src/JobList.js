@@ -24,7 +24,14 @@ function JobList({ jobsForCompany = null, applyToJob }) {
   /* Renders JobCard components based on jobs in state */
   function renderJobs() {
     // pass each prop individually
-    return jobs.map(j => <JobCard key={j.id} job={j} apply={applyToJob} />);
+    return jobs.map(j =>
+      { return <JobCard
+                key={j.id}
+                jobId={j.id}
+                title={j.title}
+                salary={j.salary}
+                equity={j.equity}
+                apply={applyToJob} />});
   }
 
   /* Updates list of jobs to be displayed
@@ -41,7 +48,12 @@ function JobList({ jobsForCompany = null, applyToJob }) {
       const jobsResult = await JoblyApi.getJobs(searchTerm);
       setJobs(jobsResult);
     }
-    makeAPIRequest();
+    try {
+      makeAPIRequest();
+    }
+    catch (e) {
+      console.error("Error: update jobs failed:\n", e);
+    }
   }, [searchTerm]);
 
 
