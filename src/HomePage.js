@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
  * App -> router / -> HomePage
  **/
 function HomePage({ currentUser }) {
-
+  console.log("HomePage rendered");
   /* Renders view for current user */
   function renderLoggedInView() {
     return (<div>Welcome Back, {currentUser.firstName}!</div>);

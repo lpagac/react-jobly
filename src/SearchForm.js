@@ -3,12 +3,15 @@ import { useState } from "react";
 /* SearchForm Component
  */
 function SearchForm({handleSearch}){
+  console.log("SearchForm rendered");
   const [searchTerm, setSearchTerm] = useState('');
 
   /** Handle form submit to prevent default  */
   function handleSubmit(evt) {
     evt.preventDefault();
+    if(searchTerm.trim() === '') return;
     handleSearch(searchTerm);
+    setSearchTerm('');
   }
 
   /* Helper function to update searchTerm */

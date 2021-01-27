@@ -2,6 +2,7 @@ import SearchForm from "./SearchForm";
 import CompanyCard from "./CompanyCard";
 import { useEffect, useState } from "react";
 import JoblyApi from "./APIHelper";
+import "./CompanyList.css";
 
 /** Render each CompanyCard and SearchForm to filter list of companies
  *
@@ -13,6 +14,7 @@ import JoblyApi from "./APIHelper";
  */
 
 function CompanyList() {
+  console.log("CompanyList rendered");
   const [companies, setCompanies] = useState([]);
   const [searchTerm, setSearchTerm] = useState();
 
@@ -40,7 +42,7 @@ function CompanyList() {
 
 
   return (
-    <div className="CompanyList-Page">
+    <div className="CompanyList-page">
       <h2>Companies:</h2>
       <SearchForm handleSearch={updateCompanies} />
       <div className="CompanyList">

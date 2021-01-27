@@ -2,6 +2,7 @@ import JobCard from "./JobCard";
 import {useEffect, useState} from "react";
 import JoblyApi from "./APIHelper";
 import SearchForm from "./SearchForm";
+import "./JobList.css";
 
 /** Render list of all jobs and SearchForm
  *
@@ -16,6 +17,7 @@ import SearchForm from "./SearchForm";
  */
 
 function JobList({ jobsForCompany=null, applyToJob }) {
+  console.log("JobList rendered");
   const [jobs, setJobs] = useState(jobsForCompany);
   const [searchTerm, setSearchTerm] = useState();
 
@@ -45,7 +47,7 @@ function JobList({ jobsForCompany=null, applyToJob }) {
   if (!jobs) return (<div >Loading...</div>);
 
   return (
-    <div className="JobList-Page">
+    <div className="JobList-page">
       <h2>Jobs:</h2>
       <SearchForm handleSearch={updateJobs} />
     <div className="JobList">

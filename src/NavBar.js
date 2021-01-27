@@ -7,6 +7,7 @@ import "./NavBar.css";
  * App -> NavBar (renders on all pages)
  **/
 function NavBar({currentUser, logOut}) {
+  console.log("NavBar rendered");
 
   // /* Renders view for current user */
   // function renderLoggedInView(){
@@ -30,18 +31,28 @@ function NavBar({currentUser, logOut}) {
 
   function renderStandardView() {
     return (
-      <div className="NavBar-right">
-        <NavLink to="/companies"> Companies </NavLink>
-        <NavLink exact to="/jobs"> Jobs </NavLink>
-        <NavLink exact to="/profile"> Profile </NavLink>
-        <NavLink exact to="/login"> Login </NavLink>
-        <NavLink exact to="/signup"> Signup </NavLink>
-      </div>);
+      <ul className="NavBar-right">
+        <li className="NavBar-item">
+          <NavLink to="/companies"> Companies </NavLink>
+        </li>
+        <li className="NavBar-item">
+          <NavLink exact to="/jobs"> Jobs </NavLink>
+        </li>
+        <li className="NavBar-item">
+          <NavLink exact to="/profile"> Profile </NavLink>
+        </li>
+        <li className="NavBar-item">
+          <NavLink exact to="/login"> Login </NavLink>
+        </li>
+        <li className="NavBar-item">
+          <NavLink exact to="/signup"> Signup </NavLink>
+        </li>
+      </ul>);
   }
 
   return(
     <nav className="NavBar">
-      <NavLink exact to="/">Jobly</NavLink>
+      <NavLink exact to="/" className="NavBar-left">Jobly</NavLink>
 
       {renderStandardView()}
     </nav>

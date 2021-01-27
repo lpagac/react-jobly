@@ -21,6 +21,7 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 
 // CODE REVIEW move NavBar & BrowserRouter to App
 function Routes({currentUser, applyToJob, updateCurrentInfo, createNewUser, loginUser}) {
+  console.log("Routes rendered");
   return(
       <Switch>
         <Route exact path="/">

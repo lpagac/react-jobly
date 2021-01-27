@@ -8,6 +8,7 @@
  */
 
 function SignUpForm({handleSubmit}) {
+  console.log("SignUpForm rendered");
   return (
     <div className="SignUpForm">
       SignUpForm

@@ -1,4 +1,31 @@
+.NavBar {
+  width: 100%;
+  display: inline;
+  margin-bottom: 20px;
+}
+
+.NavBar-left {
+  position: fixed;
+  left: 40px;
+  top: 10px;
+}
+
+.NavBar-right {
+  position: fixed;
+  right: 40px;
+  list-style: none;
+  display: inline;
+}
+
+.NavBar-item {
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
 a.active {
-  background-color: darkmagenta;
+  color: cadetblue;
   font-weight: 700;
 }

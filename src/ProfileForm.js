@@ -10,6 +10,7 @@
  */
 
 function ProfileForm({handleSubmit, user}) {
+  console.log("ProfileForm rendered");
   return (
     <div className="ProfileForm">
       ProfileForm

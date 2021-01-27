@@ -7,11 +7,13 @@ import { useState } from 'react';
 /* App component
  */
 function App() {
+  console.log("App rendered");
   const [currentUser, setCurrentUser] = useState({});
 
   function login(user){
     setCurrentUser(user);
   }
+  console.log("login function",login);
 
   function applyToJob(jobId) {
     console.log("Applied to jobid:", jobId);

@@ -14,6 +14,7 @@ import JobList from "./JobList";
  */
 
 function CompanyDetails({ applyToJob }) {
+  console.log("CompanyDetails rendered");
   const [company, setCompany] = useState();
   const { handle } = useParams();
 

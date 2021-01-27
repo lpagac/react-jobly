@@ -1,0 +1,10 @@
+.CompanyList-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CompanyList {
+  margin-top: 40px;
+}

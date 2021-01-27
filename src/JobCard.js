@@ -1,4 +1,4 @@
-// import ;
+import "./JobCard.css";
 
 /* JobCard component
  * Props:
@@ -8,9 +8,9 @@
  *
  */
 function JobCard({job, apply}) {
-
+  console.log("JobCard rendered");
   return(
-    <div>
+    <div className="JobCard">
       <h3>{job.title}</h3>
       <p>Salary: {job.salary}</p>
       <p>Equity: {job.Equity}</p>

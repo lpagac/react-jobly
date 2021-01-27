@@ -7,12 +7,15 @@ import './CompanyCard.css';
  */
 
 function CompanyCard({company}) {
+  console.log("CompanyCard rendered");
   return (
-    <Link to={`/companies/${company.handle}`} className="CompanyCard">
-      <img alt={company.name} src={company.logoUrl}></img>
-      <b> {company.name} </b> Total employees: {company.numEmployees}
-      <p> {company.description} </p>
-    </Link>
+    <div className="CompanyCard">
+      <Link to={`/companies/${company.handle}`} className="CompanyCard-contents">
+        <img alt={company.name} src={company.logoUrl}></img>
+        <b> {company.name} </b> Total employees: {company.numEmployees}
+        <p> {company.description} </p>
+      </Link>
+    </div>
   )
 }
 
