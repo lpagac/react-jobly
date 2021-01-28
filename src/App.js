@@ -22,15 +22,14 @@ function App() {
       setCurrentUser(userInfo);
     }
   }, [token]);
+
   /* Login function
    * Passed down to Routes
    */
-  function loginUser(formData){
-    async function makeApiRequestToLogin() {
-      const userToken = await JoblyApi.login(formData);
-      setToken(userToken);
-    };
-    makeApiRequestToLogin();
+  async function loginUser(formData){
+    console.log("Login!")
+    const userToken = await JoblyApi.login(formData);
+    setToken(userToken);
   };
 
   /* applyToJob function
@@ -68,7 +67,7 @@ function App() {
       const userToken = await JoblyApi.signup(formData);
       setToken(userToken);
     };
-    makeApiRequestToLogin(); 
+    makeApiRequestToLogin();
   }
 
   return (
