@@ -70,7 +70,7 @@ class JoblyApi {
   static async login({ username, password }) {
     const res = await this.request('auth/token', { username, password }, "POST");
     console.log("response for login", res);
-    // JoblyApi.token = res.token;
+    JoblyApi.token = res.token;
     return res.token;
   };
 

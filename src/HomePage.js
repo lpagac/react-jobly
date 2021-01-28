@@ -1,14 +1,24 @@
 import { Link } from 'react-router-dom';
+import UserContext from "./userContext";
+import { useContext } from "react";
+import RoboJobsImage from './roboJobs.jpg';
+
 /** HomePage Component
  * Props: currentUser (holds logged in user)
  * State:
  * App -> router / -> HomePage
  **/
-function HomePage({ currentUser }) {
+function HomePage() {
   console.log("HomePage rendered");
+  const currentUser = useContext(UserContext);
+
   /* Renders view for current user */
   function renderLoggedInView() {
-    return (<div>Welcome Back, {currentUser.firstName}!</div>);
+    return (
+    <div>
+      <p> Welcome Back, {currentUser.firstName}! </p>
+      <img alt="Robot Jobs" src={RoboJobsImage} width="100%"/>
+    </div>);
   }
   /* Renders view when there is no current user */
   function renderLoggedOutView() {

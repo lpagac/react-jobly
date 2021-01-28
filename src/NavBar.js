@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import "./NavBar.css";
 import UserContext from "./userContext";
 import { useContext } from "react";
+import "./NavBar.css";
 
 /** NavBar Component
  * Props: logout (function, logs user out)
@@ -12,31 +12,12 @@ function NavBar({ logOut }) {
   console.log("NavBar rendered");
   const currentUser = useContext(UserContext);
 
-  // /* Renders view for current user */
-  // function renderLoggedInView(){
-  //   return (
-  //     <div className="NavBar-right">
-  //       <NavLink exact to="/companies"> Companies </NavLink>
-  //       <NavLink exact to="/jobs"> Jobs </NavLink>
-  //       <NavLink exact to="/profile"> Profile </NavLink>
-  //       <button onClick={logOut}> Logout </button>
-  //     </div>);
-  // }
-
-  // /* Renders view when there is no current user */
-  // function renderLoggedOutView() {
-  //   return (
-  //     <div className="NavBar-right">
-  //       <NavLink exact to="/login"> Login </NavLink>
-  //       <NavLink exact to="/signup"> Signup </NavLink>
-  //     </div>);
-  // }
-
-  function renderStandardView() {
+  /* Renders view for current user */
+  function renderLoggedInView(){
     return (
       <ul className="NavBar-right">
         <li className="NavBar-item">
-          <NavLink to="/companies"> Companies </NavLink>
+          <NavLink exact to="/companies"> Companies </NavLink>
         </li>
         <li className="NavBar-item">
           <NavLink exact to="/jobs"> Jobs </NavLink>
@@ -45,19 +26,24 @@ function NavBar({ logOut }) {
           <NavLink exact to="/profile"> Profile </NavLink>
         </li>
         <li className="NavBar-item">
-          <NavLink exact to="/login"> Login </NavLink>
-        </li>
-        <li className="NavBar-item">
-          <NavLink exact to="/signup"> Signup </NavLink>
+          <button onClick={logOut}> Logout {currentUser.firstName} </button>
         </li>
       </ul>);
   }
 
+  /* Renders view when there is no current user */
+  function renderLoggedOutView() {
+    return (
+      <div className="NavBar-right">
+        <NavLink exact to="/login"> Login </NavLink>
+        <NavLink exact to="/signup"> Signup </NavLink>
+      </div>);
+  }
+
   return (
     <nav className="NavBar">
-      <NavLink exact to="/" className="NavBar-left">Jobly</NavLink>
-
-      {renderStandardView()}
+      <NavLink exact to="/" className="NavBar-left"> Jobly </NavLink>
+      { currentUser ? renderLoggedInView() : renderLoggedOutView()}
     </nav>
   );
 }

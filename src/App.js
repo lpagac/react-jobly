@@ -33,10 +33,19 @@ function App() {
    * Passed down to Routes
    */
   async function loginUser(formData){
-    console.log("Login!")
+    console.log("Login!");
     const userToken = await JoblyApi.login(formData);
     setToken(userToken);
   };
+
+  /** Logout function
+   * Passed down to NavBar
+   */
+  function logoutUser() {
+    console.log("Log Out!");
+    setToken('');
+    setCurrentUser(null);
+  }
 
   /* applyToJob function
    * Passed down to JobCard
@@ -81,7 +90,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider value={currentUser}>
-          <NavBar />
+          <NavBar logOut={logoutUser} />
           <Routes
             // updateProfileInfo={updateProfileInfo}
             createNewUser={createNewUser}

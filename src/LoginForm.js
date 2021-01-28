@@ -41,25 +41,33 @@ function LoginForm({ handleLogin }) {
   }
 
   return (
-    <div className="LoginForm">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">username</label>
-        <input 
-            onChange={handleChange}
-            name="username"
-            value={formData.username} 
-            id="username" />
-        <label htmlFor="password">password</label>
-        <input 
-            onChange={handleChange}
-            type="password" 
-            name="password"
-            value={formData.password} 
-            id="password" />
-        <button className="LoginForm-submit">Submit</button>
-      </form>
+    <div style={{padding: "50px"}}>
+      <div className="LoginForm">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username"> Username </label>
+            <input
+                onChange={handleChange}
+                name="username"
+                value={formData.username}
+                id="username" />
+          </div>
+          <div>
+            <label htmlFor="password"> Password </label>
+            <input
+                onChange={handleChange}
+                type="password"
+                name="password"
+                value={formData.password}
+                id="password" />
+            </div>
+            <div>
+            <button className="LoginForm-submit"> Submit </button>
+            </div>
+        </form>
+      </div>
     </div>
-  )
+  );
 }
 
 
