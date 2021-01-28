@@ -3,13 +3,13 @@ import {useHistory} from "react-router-dom";
 /** Renders login form for user
  *
  * props:
- * - handleSubmit: function to trigger API request for user info in App
+ * - logInUser: function to trigger API request for user info in App
  *
  * state:
  * - formData: object like {username, password}
  */
 
-function LoginForm({ logInUser }) {
+function LoginForm({ handleLogin }) {
   console.log("LoginForm rendered");
   const history = useHistory();
 
@@ -32,7 +32,7 @@ function LoginForm({ logInUser }) {
     evt.preventDefault();
     console.log("handleSubmit");
     try{
-      await logInUser(formData);
+      await handleLogin(formData);
       history.push("/");
     }
     catch (e){
@@ -43,7 +43,20 @@ function LoginForm({ logInUser }) {
   return (
     <div className="LoginForm">
       <form onSubmit={handleSubmit}>
-        <input value={""}></input>
+        <label htmlFor="username">username</label>
+        <input 
+            onChange={handleChange}
+            name="username"
+            value={formData.username} 
+            id="username" />
+        <label htmlFor="password">password</label>
+        <input 
+            onChange={handleChange}
+            type="password" 
+            name="password"
+            value={formData.password} 
+            id="password" />
+        <button className="LoginForm-submit">Submit</button>
       </form>
     </div>
   )

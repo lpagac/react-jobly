@@ -39,11 +39,11 @@ function Routes({ applyToJob, updateCurrentInfo, createNewUser, loginUser }) {
       </Route>
 
       <Route exact path="/signup">
-        <SignUpForm handleSubmit={createNewUser} />
+        <SignUpForm handleSignUp={createNewUser} />
       </Route>
 
       <Route exact path="/login">
-        <LoginForm handleSubmit={loginUser} />
+        <LoginForm handleLogin={loginUser} />
       </Route>
 
       <Route exact path="/profile">

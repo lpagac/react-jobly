@@ -1,14 +1,14 @@
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import "./NavBar.css";
 import UserContext from "./userContext";
-import {useContext} from "react";
+import { useContext } from "react";
 
 /** NavBar Component
  * Props: logout (function, logs user out)
  * State:
  * App -> NavBar (renders on all pages)
  **/
-function NavBar({currentUser, logOut}) {
+function NavBar({ logOut }) {
   console.log("NavBar rendered");
   const currentUser = useContext(UserContext);
 
@@ -53,7 +53,7 @@ function NavBar({currentUser, logOut}) {
       </ul>);
   }
 
-  return(
+  return (
     <nav className="NavBar">
       <NavLink exact to="/" className="NavBar-left">Jobly</NavLink>
 

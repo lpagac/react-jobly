@@ -2,10 +2,10 @@ import { BrowserRouter } from 'react-router-dom';
 import NavBar from './NavBar';
 import Routes from './Routes';
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UserContext from "./userContext";
 import JoblyApi from './APIHelper';
-import jwt from "json-web-token";
+import jwt from "jsonwebtoken";
 
 /* App component
  */
@@ -17,10 +17,16 @@ function App() {
 
   useEffect(function makeApiRequestForUser() {
     async function fetchUser() {
-      const username = jwt.decode(token).username;
-      const userInfo = await JoblyApi.getCurrentUser(username)
-      setCurrentUser(userInfo);
+      const {username} = jwt.decode(token);
+      console.log("username is", username);
+      try {
+        const userInfo = await JoblyApi.getCurrentUser(username);
+        setCurrentUser(userInfo);
+      } catch (e) {
+        console.error("unable to fetch user", e);
+      }
     }
+    if(token) fetchUser();
   }, [token]);
 
   /* Login function
@@ -42,32 +48,33 @@ function App() {
   /* updateProfileInfo function
    * Passed down to Routes
    */
-  function updateProfileInfo(formData){
-    async function updateUser() {
-      const username = jwt.decode(token).username;
-      const newUser = JoblyApi.updateUser(username, formData);
-      setCurrentUser(currUser => {
-        return {
-          ...currUser,
-          firstName: newUser.firstName,
-          lastName: newUser.lastName,
-          email: newUser.email,
-          isAdmin: newUser.isAdmin,
-        }
-    });
-    updateUser();
-  }
+  // function updateProfileInfo(formData){
+  //   async function updateUser() {
+  //     const username = jwt.decode(token).username;
+  //     const newUser = JoblyApi.updateUser(username, formData);
+  //     setCurrentUser(currUser => {
+  //       return {
+  //         ...currUser,
+  //         firstName: newUser.firstName,
+  //         lastName: newUser.lastName,
+  //         email: newUser.email,
+  //         isAdmin: newUser.isAdmin,
+  //       }
+  //   });
+  //   updateUser();
+  // }
 
   /* createNewUser function
    * used by /signup
    * Passed down to SignUpForm
    */
-  function createNewUser(formData){
-    async function makeApiRequestToLogin() {
+  async function createNewUser(formData){
+    try {
       const userToken = await JoblyApi.signup(formData);
       setToken(userToken);
-    };
-    makeApiRequestToLogin();
+    } catch (e) {
+      console.error('unable to create new user', e);
+    }
   }
 
   return (
@@ -76,7 +83,7 @@ function App() {
         <UserContext.Provider value={currentUser}>
           <NavBar />
           <Routes
-            updateProfileInfo={updateProfileInfo}
+            // updateProfileInfo={updateProfileInfo}
             createNewUser={createNewUser}
             loginUser={loginUser}
             applyToJob={applyToJob} />
