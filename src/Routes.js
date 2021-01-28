@@ -19,7 +19,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
  * state: None
  */
 
-function Routes({ applyToJob, updateCurrentInfo, createNewUser, loginUser }) {
+function Routes({ applyToJob, updateCurrentInfo, signUpUser, loginUser }) {
   console.log("Routes rendered");
   return (
     <Switch>
@@ -28,7 +28,7 @@ function Routes({ applyToJob, updateCurrentInfo, createNewUser, loginUser }) {
       </Route>
 
       <Route exact path="/signup">
-        <SignUpForm handleSignUp={createNewUser} />
+        <SignUpForm handleSignUp={signUpUser} />
       </Route>
 
       <Route exact path="/login">

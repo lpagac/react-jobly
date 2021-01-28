@@ -60,26 +60,26 @@ function SignUpForm({handleSignUp}) {
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="rounded-md shadow-sm -space-y-px">
           <div>
-            <label htmlFor="username" className="sr-only"> Username </label>
-            <input onChange={handleChange} id="username" name="username" required autoComplete="current-username"  className={styles.input} placeholder="Username" />
+            <label htmlFor="SignUpForm-username" className="sr-only"> Username </label>
+            <input onChange={handleChange} value={formData.username} id="SignUpForm-username" name="username" required autoComplete="current-username"  className={styles.input} placeholder="Username" />
           </div>
           <div>
-            <label htmlFor="password" className="sr-only">Password</label>
-            <input onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" required className={styles.input} placeholder="Password" />
+            <label htmlFor="SignUpForm-password" className="sr-only">Password</label>
+            <input onChange={handleChange} value={formData.password} id="SignUpForm-password" name="password" type="password" autoComplete="current-password" required className={styles.input} placeholder="Password" />
           </div>
 
 
           <div>
-            <label htmlFor="firstName" className="sr-only"> First Name </label>
-            <input onChange={handleChange} id="firstName" name="firstName" required autoComplete="firstName"  className={styles.input}  placeholder="First Name" />
+            <label htmlFor="SignUpForm-firstName" className="sr-only"> First Name </label>
+            <input onChange={handleChange} value={formData.firstName} id="SignUpForm-firstName" name="firstName" required autoComplete="firstName"  className={styles.input}  placeholder="First Name" />
           </div>
           <div>
-            <label htmlFor="lastName" className="sr-only">Last Name</label>
-            <input onChange={handleChange} id="lastName" name="lastName" type="lastName" autoComplete="current-lastName" required className={styles.input} placeholder="Last Name" />
+            <label htmlFor="SignUpForm-lastName" className="sr-only">Last Name</label>
+            <input onChange={handleChange} value={formData.lastName} id="SignUpForm-lastName" name="lastName" type="lastName" autoComplete="current-lastName" required className={styles.input} placeholder="Last Name" />
           </div>
           <div>
-            <label htmlFor="email" className="sr-only"> email </label>
-            <input onChange={handleChange} type="email" id="email" name="email" required autoComplete="email"  className={styles.input}  placeholder="Email address" />
+            <label htmlFor="SignUpForm-email" className="sr-only"> email </label>
+            <input onChange={handleChange} value={formData.email} type="email" id="SignUpForm-email" name="email" required autoComplete="email"  className={styles.input}  placeholder="Email address" />
           </div>
         </div>
 

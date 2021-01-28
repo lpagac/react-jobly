@@ -23,10 +23,15 @@ function App() {
         setCurrentUser(userInfo);
       } catch (e) {
         console.error("unable to fetch user", e);
-        // set current user to NULL
+        setCurrentUser(null);
       }
     }
-    if (token) fetchUser();
+    if (token) {
+      fetchUser();
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }  
   }, [token]);
 
   /* Login function
@@ -37,7 +42,6 @@ function App() {
     try {
       const userToken = await JoblyApi.login(formData);
       setToken(userToken);
-      localStorage.setItem('token', userToken);
       return { success: true };
     } catch (e) {
       return { success: false, error: e };
@@ -51,7 +55,6 @@ function App() {
     console.log("Log Out!");
     setToken('');
     setCurrentUser(null);
-    localStorage.removeItem('token');
   }
 
   /* applyToJob function
@@ -80,15 +83,16 @@ function App() {
   //   updateUser();
   // }
 
-  /* createNewUser function
+  /* signUpUser function
    * used by /signup
    * Passed down to SignUpForm
+   * 
+   * sign up user and then store their token (log them in)
    */
-  async function createNewUser(formData) {
+  async function signUpUser(formData) {
     try {
       const userToken = await JoblyApi.signup(formData);
       setToken(userToken);
-      localStorage.setItem('token', userToken);
       return { success: true }
     } catch (e) {
       return { success: false, error: e }
@@ -102,7 +106,7 @@ function App() {
           <NavBar logOut={logoutUser} />
           <Routes
             // updateProfileInfo={updateProfileInfo}
-            createNewUser={createNewUser}
+            signUpUser={signUpUser}
             loginUser={loginUser}
             applyToJob={applyToJob} />
         </UserContext.Provider>
