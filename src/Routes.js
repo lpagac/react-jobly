@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import CompanyList from './CompanyList';
 import ProfileForm from './ProfileForm';
+import PrivateRoute from "./PrivateRoute";
 import CompanyDetails from './CompanyDetails';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
@@ -26,18 +27,6 @@ function Routes({ applyToJob, updateCurrentInfo, createNewUser, loginUser }) {
         <HomePage />
       </Route>
 
-      <Route exact path="/companies">
-        <CompanyList />
-      </Route>
-
-      <Route exact path="/companies/:handle">
-        <CompanyDetails applyToJob={applyToJob} />
-      </Route>
-
-      <Route exact path="/jobs">
-        <JobList applyToJob={applyToJob} />
-      </Route>
-
       <Route exact path="/signup">
         <SignUpForm handleSignUp={createNewUser} />
       </Route>
@@ -46,9 +35,21 @@ function Routes({ applyToJob, updateCurrentInfo, createNewUser, loginUser }) {
         <LoginForm handleLogin={loginUser} />
       </Route>
 
-      <Route exact path="/profile">
+      <PrivateRoute exact path="/companies">
+        <CompanyList />
+      </PrivateRoute>
+
+      <PrivateRoute exact path="/companies/:handle">
+        <CompanyDetails applyToJob={applyToJob} />
+      </PrivateRoute>
+
+      <PrivateRoute exact path="/jobs">
+        <JobList applyToJob={applyToJob} />
+      </PrivateRoute>
+
+      <PrivateRoute exact path="/profile">
         <ProfileForm handleSubmit={updateCurrentInfo} />
-      </Route>
+      </PrivateRoute>
 
       <Route>
         <Redirect to="/" />

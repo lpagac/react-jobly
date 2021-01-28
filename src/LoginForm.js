@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {useHistory} from "react-router-dom";
+import Alert from "./Alert";
 
 /** Renders login form for user
  *
@@ -8,12 +9,14 @@ import {useHistory} from "react-router-dom";
  *
  * state:
  * - formData: object like {username, password}
+ * - errors: form errors
  */
 
 function LoginForm({ handleLogin }) {
   console.log("LoginForm rendered");
   const history = useHistory();
 
+  const [errors, setErrors] = useState(null);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -32,12 +35,11 @@ function LoginForm({ handleLogin }) {
   async function handleSubmit(evt){
     evt.preventDefault();
     console.log("handleSubmit");
-    try{
-      await handleLogin(formData);
-      history.push("/");
-    }
-    catch (e){
-      console.error("Error: Could not log in.",e);
+    let resp = await handleLogin(formData);
+    if (resp.success) {
+      return history.push("/");
+    } else {
+      setErrors(resp.error);
     }
   }
 
@@ -46,6 +48,7 @@ function LoginForm({ handleLogin }) {
   return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
+          {errors && <Alert error={errors} />}
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Sign in to your account

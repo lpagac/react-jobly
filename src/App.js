@@ -11,32 +11,37 @@ import jwt from "jsonwebtoken";
 function App() {
   console.log("App rendered");
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token'));
   // change currUser whenever the token changes via effect with token as dependency
 
   useEffect(function makeApiRequestForUser() {
     async function fetchUser() {
-      const {username} = jwt.decode(token);
-      console.log("username is", username);
+      const { username } = jwt.decode(token);
+      JoblyApi.token = token;
       try {
         const userInfo = await JoblyApi.getCurrentUser(username);
         setCurrentUser(userInfo);
-        // add token
       } catch (e) {
         console.error("unable to fetch user", e);
         // set current user to NULL
       }
     }
-    if(token) fetchUser();
+    if (token) fetchUser();
   }, [token]);
 
   /* Login function
    * Passed down to Routes
    */
-  async function loginUser(formData){
+  async function loginUser(formData) {
     console.log("Login!");
-    const userToken = await JoblyApi.login(formData);
-    setToken(userToken);
+    try {
+      const userToken = await JoblyApi.login(formData);
+      setToken(userToken);
+      localStorage.setItem('token', userToken);
+      return { success: true };
+    } catch (e) {
+      return { success: false, error: e };
+    }
   };
 
   /** Logout function
@@ -46,6 +51,7 @@ function App() {
     console.log("Log Out!");
     setToken('');
     setCurrentUser(null);
+    localStorage.removeItem('token');
   }
 
   /* applyToJob function
@@ -78,12 +84,14 @@ function App() {
    * used by /signup
    * Passed down to SignUpForm
    */
-  async function createNewUser(formData){
+  async function createNewUser(formData) {
     try {
       const userToken = await JoblyApi.signup(formData);
       setToken(userToken);
+      localStorage.setItem('token', userToken);
+      return { success: true }
     } catch (e) {
-      console.error('unable to create new user', e);
+      return { success: false, error: e }
     }
   }
 
