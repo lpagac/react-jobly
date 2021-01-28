@@ -21,8 +21,10 @@ function App() {
       try {
         const userInfo = await JoblyApi.getCurrentUser(username);
         setCurrentUser(userInfo);
+        // add token
       } catch (e) {
         console.error("unable to fetch user", e);
+        // set current user to NULL
       }
     }
     if(token) fetchUser();
