@@ -1,10 +1,16 @@
-// <!-- This example requires Tailwind CSS v2.0+ -->
-import { NavLink } from 'react-router-dom';
-// const
-const styles = {
-   navItem:'bg-gray-800 hover:bg-gray-300 hover:text-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium'
-};
-function renderLoggedInView(currentUser, logOut){
+import { useHistory, NavLink } from "react-router-dom";
+import UserContext from "./userContext";
+
+/** AuthNavBar - Authenticated Navigation Bar component
+ * Props:
+ * - styles (object with list of tailwind classes),
+ * - logOut (function to log user out)
+ * State: none
+ * App -> NavBar -> {UnAuthNavBar, AuthNavBar}
+ */
+function AuthNavBar({styles, logOut}){
+  const currentUser = useHistory(UserContext);
+
   return (
   <div>
       <nav className="bg-gray-800">
@@ -73,33 +79,4 @@ function renderLoggedInView(currentUser, logOut){
       </nav>
     </div>);
 }
-function renderLoggedOutView(){
-  return (
-  <div>
-      <nav className="bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                  <NavLink exact to="/" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" > Jobly </NavLink>
-              </div>
-              {/* <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                NAV ITEMS PLACEHOLDER
-                </div>
-              </div> */}
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-4 flex items-center justify-between h-16 md:ml-6">
-              {/* Nav-right */}
-                <NavLink exact to="/login" className={styles.navItem} > Login </NavLink>
-                <NavLink exact to="/signup" className={styles.navItem} > Signup </NavLink>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>);
-}
-export {renderLoggedInView, renderLoggedOutView};
+export default AuthNavBar;

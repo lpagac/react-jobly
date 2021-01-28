@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import UserContext from "./userContext";
 import { useContext } from "react";
-import RoboJobsImage from './roboJobs.jpg';
+import RoboJobsImage from './img/roboJobs.jpg';
 
 /** HomePage Component
  * Props: currentUser (holds logged in user)
