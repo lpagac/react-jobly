@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {useHistory} from "react-router-dom";
+import renderLoginForm from "./LoginFormTW.jsx";
 /** Renders login form for user
  *
  * props:
@@ -41,31 +42,8 @@ function LoginForm({ handleLogin }) {
   }
 
   return (
-    <div style={{padding: "50px"}}>
-      <div className="LoginForm">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username"> Username </label>
-            <input
-                onChange={handleChange}
-                name="username"
-                value={formData.username}
-                id="username" />
-          </div>
-          <div>
-            <label htmlFor="password"> Password </label>
-            <input
-                onChange={handleChange}
-                type="password"
-                name="password"
-                value={formData.password}
-                id="password" />
-            </div>
-            <div>
-            <button className="LoginForm-submit"> Submit </button>
-            </div>
-        </form>
-      </div>
+    <div className="LoginForm">
+      {renderLoginForm(handleSubmit, handleChange)}
     </div>
   );
 }

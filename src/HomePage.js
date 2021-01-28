@@ -16,23 +16,25 @@ function HomePage() {
   function renderLoggedInView() {
     return (
     <div>
-      <p> Welcome Back, {currentUser.firstName}! </p>
-      <img alt="Robot Jobs" src={RoboJobsImage} width="100%"/>
+      <h2> Welcome Back, {currentUser.firstName}! </h2>
+      <div>
+        <img className="w-5/5" alt="Robot Jobs" src={RoboJobsImage} />
+      </div>
     </div>);
   }
   /* Renders view when there is no current user */
   function renderLoggedOutView() {
     return (
-      <div>
-        <Link to="/login"> Login </Link>
-        <Link to="/signup"> Signup! </Link>
+      <div className="flex items-center justify-center mt-10">
+        <Link className="mr-4 bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-4 px-6 rounded-full" to="/login"> Login </Link>
+        <Link className="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-4 px-6 rounded-full" to="/signup"> Signup! </Link>
       </div>);
   }
   return (
     <div>
-      <header className="bg-white shadow">
+      <header className="bg-white shadow flex items-center justify-center">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold leading-tight text-gray-900">Jobly!
+        <h1 className="text-3xl font-bold leading-tight text-gray-900 text-center">Jobly!
             <small><br />All the jobs in one convenient place!</small>
           </h1>
         </div>
@@ -41,7 +43,7 @@ function HomePage() {
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           { (currentUser) ? renderLoggedInView() : renderLoggedOutView()}
           </div>
-  </main>
+      </main>
 
     </div>
   );
