@@ -2,7 +2,7 @@ import SearchForm from "./SearchForm";
 import CompanyCard from "./CompanyCard";
 import { useEffect, useState } from "react";
 import JoblyApi from "./APIHelper";
-import "./CompanyList.css";
+
 
 /** Render each CompanyCard and SearchForm to filter list of companies
  *

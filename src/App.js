@@ -1,7 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import NavBar from './NavBar';
 import Routes from './Routes';
-import './App.css';
 import { useState, useEffect } from 'react';
 import UserContext from "./userContext";
 import JoblyApi from './APIHelper';

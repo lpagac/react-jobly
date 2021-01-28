@@ -2,7 +2,7 @@ import JobCard from "./JobCard";
 import { useEffect, useState } from "react";
 import JoblyApi from "./APIHelper";
 import SearchForm from "./SearchForm";
-import "./JobList.css";
+
 
 /** Render list of all jobs and SearchForm
  *

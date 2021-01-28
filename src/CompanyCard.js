@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import './CompanyCard.css';
+
 /** Render card with company info
  *
  * props:
