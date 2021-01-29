@@ -19,11 +19,11 @@ function NavBar({ logOut }) {
   };
 
   return (
-    <nav className="NavBar">
+    <div className="fixed w-full">
       { currentUser
       ? <AuthNavBar styles={styles} logOut={logOut} />
       : <UnAuthNavBar styles={styles} /> }
-    </nav>
+    </div>
   );
 }
 

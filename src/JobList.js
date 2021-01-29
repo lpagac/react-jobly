@@ -60,14 +60,13 @@ function JobList({ jobsForCompany = null, applyToJob }) {
   if (!jobs) return (<div >Loading...</div>);
 
   return (
-    <div className="JobList-page">
-      <h2>Jobs:</h2>
+    <div className="mt-24 md:mt-16">
       <SearchForm handleSearch={updateJobs} />
-      <div className="JobList">
+      <div className="JobList flex flex-grow flex-col items-center justify-between">
         {renderJobs()}
       </div>
     </div>
-  )
+  );
 }
 
 
