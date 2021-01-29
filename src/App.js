@@ -31,7 +31,7 @@ function App() {
       localStorage.setItem('token', token);
     } else {
       localStorage.removeItem('token');
-    }  
+    }
   }, [token]);
 
   /* Login function
@@ -65,28 +65,38 @@ function App() {
   }
 
   /* updateProfileInfo function
+   * makes API request to update DB
+   * sets current user to the updated user
    * Passed down to Routes
+   * returns success object
+    * if success is false - returns any errors
    */
-  // function updateProfileInfo(formData){
-  //   async function updateUser() {
-  //     const username = jwt.decode(token).username;
-  //     const newUser = JoblyApi.updateUser(username, formData);
-  //     setCurrentUser(currUser => {
-  //       return {
-  //         ...currUser,
-  //         firstName: newUser.firstName,
-  //         lastName: newUser.lastName,
-  //         email: newUser.email,
-  //         isAdmin: newUser.isAdmin,
-  //       }
-  //   });
-  //   updateUser();
-  // }
+  async function updateProfileInfo(formData) {
+    console.log("Update user time")
+    try {
+      const username = jwt.decode(token).username;
+      const res = await JoblyApi.updateUser(username, formData);
+      setCurrentUser(currUser => {
+        return {
+          ...currUser,
+          firstName: res.firstName,
+          lastName: res.lastName,
+          email: res.email,
+          isAdmin: res.isAdmin,
+        }
+      });
+      return { success: true };
+    }
+    catch (e) {
+      return { success: false, error: e };
+    }
+  }
+
 
   /* signUpUser function
    * used by /signup
    * Passed down to SignUpForm
-   * 
+   *
    * sign up user and then store their token (log them in)
    */
   async function signUpUser(formData) {
@@ -105,7 +115,7 @@ function App() {
         <UserContext.Provider value={currentUser}>
           <NavBar logOut={logoutUser} />
           <Routes
-            // updateProfileInfo={updateProfileInfo}
+            updateProfileInfo={updateProfileInfo}
             signUpUser={signUpUser}
             loginUser={loginUser}
             applyToJob={applyToJob} />

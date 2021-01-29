@@ -19,7 +19,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
  * state: None
  */
 
-function Routes({ applyToJob, updateCurrentInfo, signUpUser, loginUser }) {
+function Routes({ applyToJob, updateProfileInfo, signUpUser, loginUser }) {
   console.log("Routes rendered");
   return (
     <Switch>
@@ -48,7 +48,7 @@ function Routes({ applyToJob, updateCurrentInfo, signUpUser, loginUser }) {
       </PrivateRoute>
 
       <PrivateRoute exact path="/profile">
-        <ProfileForm handleSubmit={updateCurrentInfo} />
+        <ProfileForm updateProfileInfo={updateProfileInfo} />
       </PrivateRoute>
 
       <Route>
