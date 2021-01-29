@@ -19,14 +19,18 @@ function SearchForm({handleSearch}){
     setSearchTerm(evt.target.value);
   }
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-sm">
-      <div className="flex items-center border-b border-teal-500 py-2">
-        <input value={searchTerm} name="name" onChange={handleChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Search..." aria-label="search bar" />
-        <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">
-          Search
-        </button>
-      </div>
-    </form>   
+    <div className="flex place-content-center">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm">
+        <div className="flex items-center border-b border-purple-500 py-2">
+          <input value={searchTerm} name="name" onChange={handleChange} className="appearance-none bg-purple-50 border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Search..." aria-label="search bar" />
+
+          <button className="bg-purple-500 text-sm rounded-lg font-bold text-white text-center px-4 py-3 transition duration-300 ease-in-out hover:bg-purple-600 mr-6" type="button">
+            Search
+          </button>
+
+        </div>
+      </form>
+    </div>
   );
 }
 

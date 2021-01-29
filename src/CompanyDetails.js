@@ -20,16 +20,16 @@ function CompanyDetails({ applyToJob }) {
 
   useEffect(function makeApiCallForComp() {
     async function fetchCompanyInfo() {
-      const res = await JoblyApi.getCompany(handle)
+      const res = await JoblyApi.getCompany(handle);
       setCompany(res);
     }
     fetchCompanyInfo();
   }, [handle]);
 
-  if (!company) return (<div>Loading...</div>);
+  if (company === undefined) return (<div>Loading...</div>);
   return (
-
     <div className="CompanyDetails">
+      <div className="h-24"></div>
       <h2 className="CompnayDetails-name">{company.name}</h2>
       <p className="CompanyDetails-description">{company.description}</p>
       <JobList applyToJob={applyToJob} jobs={company.jobs}/>

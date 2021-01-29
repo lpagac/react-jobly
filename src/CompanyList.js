@@ -47,14 +47,12 @@ function CompanyList() {
     }
   }, [searchTerm]);
 
-
-  // add loading return
-
   return (
-    <div className="CompanyList-page">
-      <h2>Companies:</h2>
+    <div className="flex flex-grow flex-col items-center CompanyList-page">
+        <div className="h-24"></div>
+      <h1 className="ml-10 mb-8 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Companies:</h1>
       <SearchForm handleSearch={updateCompanies} />
-      <div className="CompanyList">
+      <div className="CompanyList w-full JobList flex flex-grow flex-col items-center justify-between">
         {renderCompanies()}
       </div>
     </div>);
