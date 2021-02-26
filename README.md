@@ -6,7 +6,7 @@ Jobly site includes sign-up/login via JSON Web Tokens stored in LocalStorage and
 
 ## Installation and Setup Instructions
 
-### Server-side
+### Backend
 1. Clone [backend repo](https://github.com/lpagac/jobly-backend) and this repo
 2. `cd jobly-backend`
 3. `npm install`
@@ -15,15 +15,15 @@ Jobly site includes sign-up/login via JSON Web Tokens stored in LocalStorage and
 6. `psql jobly < seed.py`
 7. `npm start`
 
-#### Server-side Tests:
-2. `npm test`
+#### Backend Tests:
+1. `npm test`
 
-### Client-side
+### Frontend
 1. `cd jobly-frontend`
 2. `npm install`
 3. `npm start`
 
-#### Client-side Tests:
+#### Frontend Tests:
 1. `npm test`
 
 ## Technologies Used
