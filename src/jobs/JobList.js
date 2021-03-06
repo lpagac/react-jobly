@@ -1,7 +1,7 @@
 import JobCard from "./JobCard";
 import { useEffect, useState } from "react";
-import JoblyApi from "./APIHelper";
-import SearchForm from "./SearchForm";
+import JoblyApi from "../api/APIHelper";
+import SearchForm from "../common/SearchForm";
 
 
 /** Render list of all jobs and SearchForm
@@ -17,7 +17,6 @@ import SearchForm from "./SearchForm";
  */
 
 function JobList({ jobsForCompany = null }) {
-  console.log("JobList rendered");
   const [jobs, setJobs] = useState(jobsForCompany);
   const [searchTerm, setSearchTerm] = useState(null);
 

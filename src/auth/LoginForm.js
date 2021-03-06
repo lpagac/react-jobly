@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Alert from "./Alert";
+import Alert from "../common/Alert";
 
 /** Renders login form for user
  *
@@ -13,7 +13,6 @@ import Alert from "./Alert";
  */
 
 function LoginForm({ handleLogin }) {
-  console.log("LoginForm rendered");
   const history = useHistory();
 
   const [errors, setErrors] = useState(null);
@@ -33,11 +32,9 @@ function LoginForm({ handleLogin }) {
   };
 
   async function handleSubmit(evt) {
-    console.log("handleSubmit");
     evt.preventDefault();
     let resp = await handleLogin(formData);
     if (resp.success) {
-      // debugger;
       history.push("/");
     } else {
       setErrors(resp.errors);

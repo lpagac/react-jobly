@@ -1,7 +1,7 @@
-import SearchForm from "./SearchForm";
+import SearchForm from "../common/SearchForm";
 import CompanyCard from "./CompanyCard";
 import { useEffect, useState } from "react";
-import JoblyApi from "./APIHelper";
+import JoblyApi from "../api/APIHelper";
 
 
 /** Show page with list of companies.
@@ -15,7 +15,6 @@ import JoblyApi from "./APIHelper";
  */
 
 function CompanyList() {
-  console.log("CompanyList rendered");
   const [companies, setCompanies] = useState([]);
 
   /* Renders CompanyCard components based on Companies in state */
@@ -31,7 +30,6 @@ function CompanyList() {
   }
 
   useEffect(function getCompaniesOnMount() {
-    console.debug("CompanyList useEffect getCompaniesOnMount");
     search();
   }, []);
 

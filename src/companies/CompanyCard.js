@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
  */
 
 function CompanyCard({ handle, name, description, numEmployees }) {
-  console.log("CompanyCard rendered");
 
   return (
     <div className="w-2/5 mb-4 bg-white shadow overflow-hidden sm:rounded-lg border-solid border-gray-800 rounded-xl shadow-md">

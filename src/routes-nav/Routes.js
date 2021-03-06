@@ -1,11 +1,11 @@
-import JobList from './JobList';
-import HomePage from './HomePage';
-import LoginForm from './LoginForm';
-import SignUpForm from './SignUpForm';
-import CompanyList from './CompanyList';
-import ProfileForm from './ProfileForm';
+import JobList from '../jobs/JobList';
+import HomePage from '../homepage/HomePage';
+import LoginForm from '../auth/LoginForm';
+import SignUpForm from '../auth/SignUpForm';
+import CompanyList from '../companies/CompanyList';
+import ProfileForm from '../profiles/ProfileForm';
 import PrivateRoute from "./PrivateRoute";
-import CompanyDetails from './CompanyDetails';
+import CompanyDetails from '../companies/CompanyDetails';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 /** Renders all Routes for site
@@ -19,7 +19,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
  */
 
 function Routes({ signup, login, updateProfile }) {
-  console.log("Routes rendered");
   return (
     <Switch>
       <Route exact path="/">

@@ -1,5 +1,5 @@
-import Alert from "./Alert";
-import UserContext from './userContext';
+import Alert from "../common/Alert";
+import UserContext from '../auth/userContext';
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -15,7 +15,6 @@ import { useHistory } from "react-router-dom";
  */
 
 function ProfileForm({ handleUpdate }) {
-  console.log("ProfileForm rendered");
   
   const { currentUser } = useContext(UserContext);
   const history = useHistory();

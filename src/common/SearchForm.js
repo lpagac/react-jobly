@@ -3,7 +3,6 @@ import { useState } from "react";
 /* SearchForm Component
  */
 function SearchForm({handleSearch}){
-  console.log("SearchForm rendered");
   const [searchTerm, setSearchTerm] = useState('');
 
   /** Tell parent to filter */

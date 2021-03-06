@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import UserContext from "./userContext";
+import UserContext from "../auth/userContext";
 
 /* JobCard component
  * Props:
@@ -9,13 +9,11 @@ import UserContext from "./userContext";
  *
  */
 function JobCard({jobId, title, salary, equity, companyName}) {
-  console.log("JobCard rendered");
 
   const { hasAppliedToJob, applyToJob } = useContext(UserContext);
   const [applied, setApplied] = useState();
   
   useEffect(function updateAppliedStatus() {
-    console.debug("JobCard useEffect updateAppliedStatus", "id=", jobId);
 
     setApplied(hasAppliedToJob(jobId));
   }, [jobId, hasAppliedToJob]);

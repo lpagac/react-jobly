@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import JoblyApi from "./APIHelper";
-import JobList from "./JobList";
+import JoblyApi from "../api/APIHelper";
+import JobList from "../jobs/JobList";
 
 /** Renders company info with JobList component below
  *
@@ -14,7 +14,6 @@ import JobList from "./JobList";
  */
 
 function CompanyDetails() {
-  console.log("CompanyDetails rendered");
   const [company, setCompany] = useState();
   const { handle } = useParams();
 

@@ -21,7 +21,7 @@ Jobly site includes sign-up/login via JSON Web Tokens stored in LocalStorage and
 ### Frontend
 1. `cd jobly-frontend`
 2. `npm install`
-3. `npm start`
+3. `npm run start`
 
 #### Frontend Tests:
 1. `npm test`

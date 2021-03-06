@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import UserContext from "./userContext";
+import UserContext from "../auth/userContext";
 import { useContext } from "react";
 import RoboJobsImage from './img/roboJobs.jpg';
 
@@ -13,7 +13,6 @@ import RoboJobsImage from './img/roboJobs.jpg';
  */
 
 function HomePage() {
-  console.log("HomePage rendered");
   const { currentUser } = useContext(UserContext);
 
   /* Renders view for current user */

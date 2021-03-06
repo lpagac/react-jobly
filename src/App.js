@@ -1,16 +1,15 @@
 import { BrowserRouter } from 'react-router-dom';
-import NavBar from './NavBar';
-import Routes from './Routes';
+import NavBar from './routes-nav/NavBar';
+import Routes from './routes-nav/Routes';
 import { useState, useEffect } from 'react';
-import UserContext from "./userContext";
-import JoblyApi from './APIHelper';
+import UserContext from "./auth/userContext";
+import JoblyApi from './api/APIHelper';
 import jwt from "jsonwebtoken";
 import useLocalStorage from "./hooks/useLocalStorage";
 
 export const TOKEN_STORAGE_ID = "jobly-token";
 
 function App() {
-  console.log("App rendered");
   const [currentUser, setCurrentUser] = useState(null);
   const [appliedIds, setAppliedIds] = useState(new Set([]));
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
@@ -39,7 +38,6 @@ function App() {
    * Passed down to Routes
    */
   async function login(loginData) {
-    console.log("Login!");
     try {
       const userToken = await JoblyApi.login(loginData);
       setToken(userToken);
@@ -53,7 +51,6 @@ function App() {
    * Passed down to NavBar
    */
   function logoutUser() {
-    console.log("Log Out!");
     setToken(null);
     setCurrentUser(null);
   }

@@ -1,4 +1,4 @@
-import UserContext from "./userContext";
+import UserContext from "../auth/userContext";
 import { useContext } from "react";
 import AuthNavBar from "./AuthNavBar";
 import UnAuthNavBar from "./UnAuthNavBar";
@@ -10,7 +10,6 @@ import UnAuthNavBar from "./UnAuthNavBar";
  * App -> NavBar -> {UnAuthNavBar, AuthNavBar}
  **/
 function NavBar({ logout }) {
-  console.log("NavBar rendered");
   const { currentUser } = useContext(UserContext);
 
   const styles = {
