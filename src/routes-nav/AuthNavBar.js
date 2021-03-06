@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import UserContext from "./userContext";
+import UserContext from "../auth/userContext";
 
 /** AuthNavBar - Authenticated Navigation Bar component
  * Props:

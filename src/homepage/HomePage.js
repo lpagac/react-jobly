@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import UserContext from "../auth/userContext";
 import { useContext } from "react";
-import RoboJobsImage from './img/roboJobs.jpg';
+import RoboJobsImage from '../img/roboJobs.jpg';
 
 /** Homepage of site.
  *
