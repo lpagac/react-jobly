@@ -13,7 +13,7 @@ import JobList from "./JobList";
  *
  */
 
-function CompanyDetails({ applyToJob }) {
+function CompanyDetails() {
   console.log("CompanyDetails rendered");
   const [company, setCompany] = useState();
   const { handle } = useParams();
@@ -28,11 +28,15 @@ function CompanyDetails({ applyToJob }) {
 
   if (company === undefined) return (<div>Loading...</div>);
   return (
-    <div className="CompanyDetails">
-      <div className="h-24"></div>
-      <h2 className="CompnayDetails-name">{company.name}</h2>
-      <p className="CompanyDetails-description">{company.description}</p>
-      <JobList applyToJob={applyToJob} jobs={company.jobs}/>
+    <div className="lg:text-center mt-7">
+      <h2 className="text-base text-indigo-600 font-semibold tracking-wide">{company.handle}</h2>
+      <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        {company.name}
+      </p>
+      <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+        {company.description}
+      </p>
+      <JobList jobs={company.jobs}/>
     </div>
   )
 }

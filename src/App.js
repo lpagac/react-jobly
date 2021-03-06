@@ -5,46 +5,47 @@ import { useState, useEffect } from 'react';
 import UserContext from "./userContext";
 import JoblyApi from './APIHelper';
 import jwt from "jsonwebtoken";
+import useLocalStorage from "./hooks/useLocalStorage";
 
-/* App component
- */
+export const TOKEN_STORAGE_ID = "jobly-token";
+
 function App() {
   console.log("App rendered");
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [appliedIds, setAppliedIds] = useState(new Set([]));
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   // change currUser whenever the token changes via effect with token as dependency
 
   useEffect(function makeApiRequestForUser() {
     async function fetchUser() {
-      const { username } = jwt.decode(token);
-      JoblyApi.token = token;
-      try {
-        const userInfo = await JoblyApi.getCurrentUser(username);
-        setCurrentUser(userInfo);
-      } catch (e) {
-        console.error("unable to fetch user", e);
-        setCurrentUser(null);
+      if (token) {
+        try {
+          const { username } = jwt.decode(token);
+          // put token on API class so it can make the request
+          JoblyApi.token = token;
+          const currentUser = await JoblyApi.getCurrentUser(username);
+          setCurrentUser(currentUser);
+          setAppliedIds(new Set(currentUser.applications));
+        } catch (e) {
+          console.error("App fetchUser: problem loading", e);
+          setCurrentUser(null);
+        }
       }
     }
-    if (token) {
-      fetchUser();
-      localStorage.setItem('token', token);
-    } else {
-      localStorage.removeItem('token');
-    }
+    fetchUser();
   }, [token]);
 
   /* Login function
    * Passed down to Routes
    */
-  async function loginUser(formData) {
+  async function login(loginData) {
     console.log("Login!");
     try {
-      const userToken = await JoblyApi.login(formData);
+      const userToken = await JoblyApi.login(loginData);
       setToken(userToken);
       return { success: true };
-    } catch (e) {
-      return { success: false, error: e };
+    } catch (errors) {
+      return { success: false, errors };
     }
   };
 
@@ -53,72 +54,64 @@ function App() {
    */
   function logoutUser() {
     console.log("Log Out!");
-    setToken('');
+    setToken(null);
     setCurrentUser(null);
   }
 
-  /* applyToJob function
-   * Passed down to JobCard
-   */
-  function applyToJob(jobId) {
-    console.log("Applied to jobid:", jobId);
-  }
-
-  /* updateProfileInfo function
-   * makes API request to update DB
-   * sets current user to the updated user
-   * Passed down to Routes
-   * returns success object
-    * if success is false - returns any errors
-   */
-  async function updateProfileInfo(formData) {
-    console.log("Update user time")
-    try {
-      const username = jwt.decode(token).username;
-      const res = await JoblyApi.updateUser(username, formData);
-      setCurrentUser(currUser => {
-        return {
-          ...currUser,
-          firstName: res.firstName,
-          lastName: res.lastName,
-          email: res.email,
-          isAdmin: res.isAdmin,
-        }
-      });
-      return { success: true };
-    }
-    catch (e) {
-      return { success: false, error: e };
-    }
-  }
-
-
-  /* signUpUser function
+  /* signup function
    * used by /signup
    * Passed down to SignUpForm
    *
    * sign up user and then store their token (log them in)
    */
-  async function signUpUser(formData) {
+  async function signup(signupData) {
     try {
-      const userToken = await JoblyApi.signup(formData);
+      const userToken = await JoblyApi.signup(signupData);
       setToken(userToken);
       return { success: true }
-    } catch (e) {
-      return { success: false, error: e }
+    } catch (errors) {
+      return { success: false, errors }
     }
   }
+
+  /** Update users profile information
+   * used by /profile
+   * passed down to ProfileForm
+   */
+  async function updateProfile(updateInfo) {
+    try {
+      await JoblyApi.updateUser(currentUser.username, updateInfo);
+    } catch (errors) {
+      return {success: false, errors}
+    }
+  }
+
+  /** Checks if a job has been applied for. */
+  function hasAppliedToJob(id) {
+    return appliedIds.has(id);
+  }
+
+  /* applyToJob function
+   * Passed down to JobCard
+   * make API call and update set of application IDs
+   */
+  function applyToJob(jobId) {
+    if (hasAppliedToJob(jobId)) return;
+    JoblyApi.applyToJob(currentUser.username, jobId);
+    setAppliedIds(new Set([...appliedIds, jobId]));
+  }
+
 
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={currentUser}>
-          <NavBar logOut={logoutUser} />
+        <UserContext.Provider value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}>
+          <NavBar logout={logoutUser} />
           <Routes
-            updateProfileInfo={updateProfileInfo}
-            signUpUser={signUpUser}
-            loginUser={loginUser}
-            applyToJob={applyToJob} />
+            signup={signup}
+            login={login} 
+            updateProfile={updateProfile}
+          />
         </UserContext.Provider>
       </BrowserRouter>
     </div>

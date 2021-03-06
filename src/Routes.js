@@ -11,15 +11,14 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 /** Renders all Routes for site
  *
  * props:
- * - applyToJob: function
- * - updateCurrentInfo: function
- * - createNewUser: function
- * - loginUser: function
+ * - updateProfile: function
+ * - signup: function
+ * - login: function
  *
  * state: None
  */
 
-function Routes({ applyToJob, updateProfileInfo, signUpUser, loginUser }) {
+function Routes({ signup, login, updateProfile }) {
   console.log("Routes rendered");
   return (
     <Switch>
@@ -28,11 +27,11 @@ function Routes({ applyToJob, updateProfileInfo, signUpUser, loginUser }) {
       </Route>
 
       <Route exact path="/signup">
-        <SignUpForm handleSignUp={signUpUser} />
+        <SignUpForm handleSignUp={signup} />
       </Route>
 
       <Route exact path="/login">
-        <LoginForm handleLogin={loginUser} />
+        <LoginForm handleLogin={login} />
       </Route>
 
       <PrivateRoute exact path="/companies">
@@ -40,15 +39,15 @@ function Routes({ applyToJob, updateProfileInfo, signUpUser, loginUser }) {
       </PrivateRoute>
 
       <PrivateRoute exact path="/companies/:handle">
-        <CompanyDetails applyToJob={applyToJob} />
+        <CompanyDetails />
       </PrivateRoute>
 
       <PrivateRoute exact path="/jobs">
-        <JobList applyToJob={applyToJob} />
+        <JobList />
       </PrivateRoute>
 
       <PrivateRoute exact path="/profile">
-        <ProfileForm updateProfileInfo={updateProfileInfo} />
+        <ProfileForm handleUpdate={updateProfile} />
       </PrivateRoute>
 
       <Route>

@@ -1,6 +1,6 @@
 import { useContext} from "react";
 import UserContext from "./userContext";
-import { Redirect } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
 /** PrivateRoute protector for users not logged in
  * 
@@ -9,12 +9,18 @@ import { Redirect } from "react-router-dom";
  * state: None
  */
 
-function PrivateRoute(props) {
+function PrivateRoute({exact, path, children}) {
   console.log("PrivateRoute rendered");
-  const currentUser = useContext(UserContext);
+  const {currentUser} = useContext(UserContext);
 
-  if (currentUser) return props.children;
-  return <Redirect to="/" />
+  if (!currentUser) 
+  return <Redirect to="/login" />
+
+  return (
+    <Route exact={exact} path={path}>
+      {children}
+    </Route>
+  );
 }
 
 export default PrivateRoute;

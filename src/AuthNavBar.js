@@ -1,23 +1,24 @@
-import { useHistory, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import UserContext from "./userContext";
 
 /** AuthNavBar - Authenticated Navigation Bar component
  * Props:
  * - styles (object with list of tailwind classes),
- * - logOut (function to log user out)
+ * - logout (function to log user out)
  * State: none
  * App -> NavBar -> {UnAuthNavBar, AuthNavBar}
  */
-function AuthNavBar({styles, logOut}){
-  const currentUser = useHistory(UserContext);
+function AuthNavBar({ styles, logout }) {
+  const { currentUser } = useContext(UserContext);
 
   return (
-    <nav className="fixed w-full bg-gray-800">
+    <nav className="w-full bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-                <NavLink exact to="/" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" > Jobly </NavLink>
+              <NavLink exact to="/" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" > Jobly </NavLink>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
@@ -28,11 +29,11 @@ function AuthNavBar({styles, logOut}){
           </div>
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
-            {/* Nav-right */}
+              {/* Nav-right */}
               <NavLink exact to="/companies" className={styles.navItem} > Companies </NavLink>
               <NavLink exact to="/jobs" className={styles.navItem} > Jobs </NavLink>
               <NavLink exact to="/profile" className={styles.navItem} > Profile </NavLink>
-              <button onClick={logOut} className={styles.navItem} > Logout {currentUser.firstName} </button>
+              <button onClick={logout} className={styles.navItem} > Logout {currentUser.firstName} </button>
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -72,7 +73,7 @@ function AuthNavBar({styles, logOut}){
           <NavLink exact to="/companies" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" > Companies </NavLink>
           <NavLink exact to="/jobs" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"> Jobs </NavLink>
           <NavLink exact to="/profile" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"> Profile </NavLink>
-          <button onClick={logOut} > Logout {currentUser.firstName} </button>
+          <button onClick={logout} > Logout {currentUser.firstName} </button>
         </div>
       </div>
     </nav>

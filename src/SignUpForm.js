@@ -15,7 +15,7 @@ import Alert from "./Alert";
 function SignUpForm({handleSignUp}) {
   console.log("SignUpForm rendered");
   const history = useHistory();
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -38,20 +38,18 @@ function SignUpForm({handleSignUp}) {
   async function handleSubmit(evt) {
     console.log("handleSubmit");
     evt.preventDefault();
-    const formVals = Object.values(formData);
-    if (formVals.some(val => val.trim() === '')) return;
     let resp = await handleSignUp(formData);
     if (resp.success) {
-      return history.push("/");
+      history.push("/");
     } else {
-      setErrors(resp.error);
+      setErrors(resp.errors);
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div className="max-w-md w-full space-y-8">
-      {errors && <Alert error={errors} />}
+      {errors && <Alert errors={errors} />}
       <div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign up for an account:

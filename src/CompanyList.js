@@ -4,54 +4,48 @@ import { useEffect, useState } from "react";
 import JoblyApi from "./APIHelper";
 
 
-/** Render each CompanyCard and SearchForm to filter list of companies
+/** Show page with list of companies.
  *
- * props: None
+ * On mount, loads companies from API.
+ * Re-loads filtered companies on submit from search form.
  *
- * state:
- * - companies: array like [{company info}, ...]
- * - searchTerm: term used in API request to get filtered list of companies
+ * This is routed to at /companies
+ *
+ * Routes -> { CompanyCard, SearchForm }
  */
 
 function CompanyList() {
   console.log("CompanyList rendered");
   const [companies, setCompanies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(null);
 
   /* Renders CompanyCard components based on Companies in state */
   function renderCompanies() {
-    // pass down each key individually
-    return companies.map(company => <CompanyCard key={company.handle} company={company} />);
+    return companies.map(company =>
+      <CompanyCard 
+        key={company.handle} 
+        handle={company.handle}
+        name={company.name}
+        description={company.description}
+        numEmployees={company.numEmployees}
+         />);
   }
 
-  /* Updates list of companies to be displayed
-   * on page after search */
-  function updateCompanies(searchTerm) {
-    setSearchTerm(searchTerm);
-  }
+  useEffect(function getCompaniesOnMount() {
+    console.debug("CompanyList useEffect getCompaniesOnMount");
+    search();
+  }, []);
 
-  /* Uses effect to make a request to companies API
-   * Fetches a list of companies to display
-   */
-  useEffect(function makeCompaniesAPIRequest() {
-    async function makeAPIRequest() {
-      // wrap with try/catch
-      const companiesResult = await JoblyApi.getCompanies(searchTerm);
-      setCompanies(companiesResult);
-    }
-    try {
-      makeAPIRequest();
-    }
-    catch (e) {
-      console.error("Error: update jobs failed:\n", e);
-    }
-  }, [searchTerm]);
+  /** Triggered by search form submit; reloads companies. */
+  async function search(name) {
+    let companies = await JoblyApi.getCompanies(name);
+    setCompanies(companies);
+  }
 
   return (
     <div className="flex flex-grow flex-col items-center CompanyList-page">
         <div className="h-24"></div>
       <h1 className="ml-10 mb-8 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Companies:</h1>
-      <SearchForm handleSearch={updateCompanies} />
+      <SearchForm handleSearch={search} />
       <div className="CompanyList w-full JobList flex flex-grow flex-col items-center justify-between">
         {renderCompanies()}
       </div>

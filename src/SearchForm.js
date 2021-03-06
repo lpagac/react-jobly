@@ -6,12 +6,12 @@ function SearchForm({handleSearch}){
   console.log("SearchForm rendered");
   const [searchTerm, setSearchTerm] = useState('');
 
-  /** Handle form submit to prevent default  */
+  /** Tell parent to filter */
   function handleSubmit(evt) {
+    // take care of accidentally trying to search for just spaces
     evt.preventDefault();
-    if(searchTerm.trim() === '') return;
-    handleSearch(searchTerm);
-    setSearchTerm('');
+    handleSearch(searchTerm.trim() || undefined);
+    setSearchTerm(searchTerm.trim());
   }
 
   /* Helper function to update searchTerm */
@@ -24,7 +24,7 @@ function SearchForm({handleSearch}){
         <div className="flex items-center border-b border-purple-500 py-2">
           <input value={searchTerm} name="name" onChange={handleChange} className="appearance-none bg-purple-50 border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Search..." aria-label="search bar" />
 
-          <button className="bg-purple-500 text-sm rounded-lg font-bold text-white text-center px-4 py-3 transition duration-300 ease-in-out hover:bg-purple-600 mr-6" type="button">
+          <button className="bg-purple-500 text-sm rounded-lg font-bold text-white text-center px-4 py-3 transition duration-300 ease-in-out hover:bg-purple-600 mr-6" type="submit">
             Search
           </button>
 

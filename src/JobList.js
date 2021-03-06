@@ -16,29 +16,10 @@ import SearchForm from "./SearchForm";
  *
  */
 
-function JobList({ jobsForCompany = null, applyToJob }) {
+function JobList({ jobsForCompany = null }) {
   console.log("JobList rendered");
   const [jobs, setJobs] = useState(jobsForCompany);
   const [searchTerm, setSearchTerm] = useState(null);
-
-  /* Renders JobCard components based on jobs in state */
-  function renderJobs() {
-    // pass each prop individually
-    return jobs.map(j =>
-      { return <JobCard
-                key={j.id}
-                jobId={j.id}
-                title={j.title}
-                salary={j.salary}
-                equity={j.equity}
-                apply={applyToJob} />});
-  }
-
-  /* Updates list of jobs to be displayed
-   * on page after search */
-  function updateJobs(searchTerm) {
-    setSearchTerm(searchTerm);
-  }
 
   /* Uses effect to make a request to jobs API
    * Fetches a list of jobs to display
@@ -55,6 +36,25 @@ function JobList({ jobsForCompany = null, applyToJob }) {
       console.error("Error: update jobs failed:\n", e);
     }
   }, [searchTerm]);
+
+  /* Renders JobCard components based on jobs in state */
+  function renderJobs() {
+    return jobs.map(j =>
+      { return <JobCard
+                key={j.id}
+                jobId={j.id}
+                title={j.title}
+                salary={j.salary}
+                equity={j.equity}
+                companyName={j.companyName} />});
+  }
+
+  /* Updates list of jobs to be displayed
+   * on page after search */
+  function updateJobs(searchTerm) {
+    setSearchTerm(searchTerm);
+  }
+
 
 
   if (!jobs) return (<div >Loading...</div>);
