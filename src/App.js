@@ -77,7 +77,8 @@ function App() {
    */
   async function updateProfile(updateInfo) {
     try {
-      await JoblyApi.updateUser(currentUser.username, updateInfo);
+      const res = await JoblyApi.updateUser(currentUser.username, updateInfo);
+      setCurrentUser(res);
       return {success: true}
     } catch (errors) {
       return {success: false, errors}
